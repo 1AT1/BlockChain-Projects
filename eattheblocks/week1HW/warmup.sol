@@ -44,10 +44,10 @@ contract DecentralizedVotingSystem {
        if (_candidateId == 0 || _candidateId > candidatesCount) {
             revert CandidateNotExists(_candidateId);
        }
-       if(hasVoted[msg.sender]==true){
+       if(hasVoted[msg.sender]){
             revert AddressAlreadyVoted(msg.sender);
        }
-       candidates[_candidateId].voteCount = candidates[_candidateId].voteCount + 1;
+       candidates[_candidateId].voteCount++;
        hasVoted[msg.sender] = true;
        emit VoteCasted(_candidateId,msg.sender);
     }
