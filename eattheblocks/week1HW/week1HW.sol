@@ -39,7 +39,7 @@ pragma solidity 0.8.25;
 contract PointManager {
     address owner;
     mapping(address => uint256) public userPoints;
-
+    
     constructor() {
         owner = msg.sender;
     }
