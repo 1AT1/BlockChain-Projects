@@ -1,0 +1,3 @@
+[submodule "eattheblocks/day7/lib/forge-std"]
+	path = eattheblocks/day7/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
