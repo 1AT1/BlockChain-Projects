@@ -7,6 +7,8 @@ import {Test} from "forge-std/Test.sol";
 import {Charity} from "../src/Charity.sol";
 
 contract CharityTest is Test {
+    event Donated(address indexed donator, uint256 amount);
+    event Withdrawn(uint256 amount);
     Charity public charity;
     address owner = msg.sender;
     uint256 moneyCollectingDeadline;
@@ -40,6 +42,25 @@ contract CharityTest is Test {
         vm.expectRevert(Charity.NotEnoughDonationAmount.selector);
         charity.donate{value: 0 ether}();
     }
+    function test_donate() public{
+        moneyCollectingDeadline = 1;
+        charity = new Charity(owner,moneyCollectingDeadline);
+        address myAddress = address(1);
+        uint256 donationAmount = 10 ether;
+        vm.expectEmit(true, false, false, true);
+        emit Donated(myAddress, donationAmount);
+         
+        console.log("Current balance of Charity contract:" , address(charity).balance);
+        
+        hoax(myAddress, donationAmount);
+
+        charity.donate{value: donationAmount}();
+        console.log("Current balance of Charity contract:" , address(charity).balance);
+
+        assert(charity.userDonations(myAddress) == donationAmount);
+        
+    }
+
     function test_NotOwner() public{
         moneyCollectingDeadline = 1;
         charity = new Charity(owner,moneyCollectingDeadline);
@@ -71,10 +92,12 @@ contract CharityTest is Test {
         charity.withdraw(1 ether);
     }
     function test_withdraw() public {
+        uint256 currentBalance = address(this).balance;
         moneyCollectingDeadline = 1;
         charity = new Charity(owner,moneyCollectingDeadline);
         vm.deal(address(charity), 1 ether);
-        vm.expectEmit(address(charity), owner, owner.balance, true);
+        vm.expectEmit(true, true, true, true);
+        emit Withdrawn(address(charity).balance);
         vm.prank(owner);
         charity.withdraw(1 ether);
 

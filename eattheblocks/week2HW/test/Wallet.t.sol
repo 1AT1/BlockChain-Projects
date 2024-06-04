@@ -3,52 +3,73 @@
 pragma solidity ^0.8.13;
 
 import {Test} from "forge-std/Test.sol";
-import {BoxStorage} from "../src/BoxStorage.sol";
+import {Wallet} from "../src/Wallet.sol";
+import {ICharity} from "../src/ICharity.sol";
+import {Charity} from "../src/Charity.sol";
 
 contract BoxStorageTest is Test {
-    BoxStorage public boxStorage;
+   Wallet public wallet;
+   address owner = msg.sender;
+   address charityOwner = address(1);
+   Charity public charity;
+   uint256 public charityPercentage = 50; // 5 percent
 
-    uint256 minimumSizeInCm = 10;
+   function setUp() public{
+     charity = new Charity(charityOwner, 1 days);
+     wallet = new Wallet(owner, address(charity), charityPercentage);
+   }
 
-    function setUp() public {
-        boxStorage = new BoxStorage(minimumSizeInCm);
+   function test_RevertWhen_CanNotDepositZeroEthers() public {
+        vm.expectRevert(Wallet.CanNotDepositZeroEthers.selector);
+        wallet.deposit{value: 0}();
+    }
+    function test_deposit() public {
+        address depositor = address(3);
+        vm.startPrank(depositor);
+        vm.deal(depositor, 1 ether);
+        wallet.deposit{value: 1 ether}();
+        uint256 expectedCharityDonation = (1 ether * charityPercentage) / 1000;
+        assertEq(expectedCharityDonation,address(charity).balance);
+        vm.stopPrank();
     }
 
-    function test_CreateBox() public {
-        uint256 width = minimumSizeInCm+1;
-        uint256 length = minimumSizeInCm+1;
-        uint256 height = minimumSizeInCm+1;
-        boxStorage.createBox(width, length, height); 
-        (uint256 _width, uint256 _length, uint256 _height) = boxStorage.boxes(0);
-        assertEq(_width, width);
-        assertEq(_length, length);
-        assertEq(_height, height);
+    function test_NotOwner() public{
+        address theif = address(5);
+        wallet.deposit{value: 1 ether}();
+        vm.expectRevert(Wallet.NotOwner.selector); 
+        vm.startPrank(theif);
+        wallet.withdraw(1 ether);
+        vm.stopPrank();
+       
+    }
+    function test_NotEnoughMoney() public{
+        vm.expectRevert(Wallet.NotEnoughMoney.selector);
+        vm.startPrank(owner);
+        wallet.withdraw(1 ether);
+        vm.stopPrank();
+    }
+    function test_withdraw() public{
+        uint256 currentBalance = owner.balance;
+        wallet.deposit{value: 2 ether}();
+        vm.startPrank(owner);
+        wallet.withdraw(1 ether);
+        vm.stopPrank();
+        assertEq(currentBalance+1 ether,owner.balance);
+
     }
 
-    function test_RevertWhen_WidthLessThanMinimum() public {
-        uint256 width = minimumSizeInCm - 1;
-        uint256 length = minimumSizeInCm;
-        uint256 height = minimumSizeInCm;
-        vm.expectRevert(abi.encodeWithSelector(BoxStorage.WrongWidth.selector, width, minimumSizeInCm));
+    function test_TransferFailed() public{
+        //MY CODE
 
-        boxStorage.createBox(width, length, height);    
+        vm.prank(owner);
+        vm.expectRevert(Wallet.TransferFailed.selector);
+        vm.mockCall(
+            address(owner),
+            1 ether,
+            abi.encodeWithSelector(Charity.withdraw.selector),
+            abi.encode( bytes32(0))
+        );
+        charity.withdraw(1 ether);
     }
 
-    function test_RevertWhen_LengthLessThanMinimum() public {
-        uint256 width = minimumSizeInCm;
-        uint256 length = minimumSizeInCm - 1;
-        uint256 height = minimumSizeInCm;
-        vm.expectRevert(abi.encodeWithSelector(BoxStorage.WrongLength.selector, length, minimumSizeInCm));
-
-        boxStorage.createBox(width, length, height);  
-    }
-
-    function test_RevertWhen_HeightLessThanMinimum() public {
-        uint256 width = minimumSizeInCm;
-        uint256 length = minimumSizeInCm;
-        uint256 height = minimumSizeInCm - 1;
-        vm.expectRevert(abi.encodeWithSelector(BoxStorage.WrongHeight.selector, height, minimumSizeInCm));
-
-        boxStorage.createBox(width, length, height); 
-    }
 }

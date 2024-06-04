@@ -1,0 +1,89 @@
+antony@DESKTOP-8R44L35:/mnt/c/Users/anton/Desktop/BlockChain-Projects/eattheblocks/week2HW$ forge script ./script/CharitynWallet.s.sol --broadcast --verify
+[⠔] Compiling...
+No files changed, compilation skipped
+Script ran successfully.
+Gas used: 589754
+
+== Logs ==
+  Charity deployed at: 0xb2D74387cF9CFaFcDbfA28dCa565a5F70B7b5E3d
+  Wallet deployed at: 0x17AFd3B29626641F16e0Ae722De2f6E8bB3Fe692
+
+## Setting up 1 EVM.
+
+==========================
+
+Chain 11155111
+
+Estimated gas price: 27.10571114 gwei
+
+Estimated total gas used for script: 789731
+
+Estimated amount required: 0.02140622036430334 ETH
+
+==========================
+##
+Sending transactions [0 - 1].
+⠉ [00:00:00] [###################################################################################################################################################################################################] 2/2 txes (0.0s)##
+Waiting for receipts.
+⠙ [00:00:14] [###############################################################################################################################################################################################] 2/2 receipts (0.0s)##### sepolia
+✅  [Success]Hash: 0x2fde9f1d06fbc2290a33cafa7d6b158c057cf0cec2187d71996d72e223133ef7
+Contract Address: 0xb2D74387cF9CFaFcDbfA28dCa565a5F70B7b5E3d
+Block: 6031759
+Paid: 0.0038392435745732 ETH (291188 gas * 13.1847589 gwei)
+
+
+##### sepolia
+✅  [Success]Hash: 0x9cea22ffd7726387a4a67feec9a90800bad9b888874c035ed8bb4fcf6f1bfe78
+Contract Address: 0x17AFd3B29626641F16e0Ae722De2f6E8bB3Fe692
+Block: 6031759
+Paid: 0.0041722642148694 ETH (316446 gas * 13.1847589 gwei)
+
+
+
+==========================
+
+ONCHAIN EXECUTION COMPLETE & SUCCESSFUL.
+Total Paid: 0.0080115077894426 ETH (607634 gas * avg 13.1847589 gwei)
+##
+Start verification for (2) contracts
+Start verifying contract `0xb2D74387cF9CFaFcDbfA28dCa565a5F70B7b5E3d` deployed on sepolia
+
+Submitting verification for [src/Charity.sol:Charity] 0xb2D74387cF9CFaFcDbfA28dCa565a5F70B7b5E3d.
+
+Submitting verification for [src/Charity.sol:Charity] 0xb2D74387cF9CFaFcDbfA28dCa565a5F70B7b5E3d.
+
+Submitting verification for [src/Charity.sol:Charity] 0xb2D74387cF9CFaFcDbfA28dCa565a5F70B7b5E3d.
+
+Submitting verification for [src/Charity.sol:Charity] 0xb2D74387cF9CFaFcDbfA28dCa565a5F70B7b5E3d.
+Submitted contract for verification:
+        Response: `OK`
+        GUID: `ujswyt8v9xyhjunp23fgh4nzu98jzjerwnvibwul2ysm9vym7h`
+        URL: https://sepolia.etherscan.io/address/0xb2d74387cf9cfafcdbfa28dca565a5f70b7b5e3d
+Contract verification status:
+Response: `NOTOK`
+Details: `Pending in queue`
+Contract verification status:
+Response: `OK`
+Details: `Pass - Verified`
+Contract successfully verified
+Start verifying contract `0x17AFd3B29626641F16e0Ae722De2f6E8bB3Fe692` deployed on sepolia
+
+Submitting verification for [src/Wallet.sol:Wallet] 0x17AFd3B29626641F16e0Ae722De2f6E8bB3Fe692.
+Submitted contract for verification:
+        Response: `OK`
+        GUID: `ryxnaqvtbplqvqthnxzvm58wfic2qpbkdij6kgdvmim61dtttt`
+        URL: https://sepolia.etherscan.io/address/0x17afd3b29626641f16e0ae722de2f6e8bb3fe692
+Contract verification status:
+Response: `NOTOK`
+Details: `Pending in queue`
+Contract verification status:
+Response: `NOTOK`
+Details: `Already Verified`
+Contract source code already verified
+All (2) contracts were verified!
+
+Transactions saved to: /mnt/c/Users/anton/Desktop/BlockChain-Projects/eattheblocks/week2HW/broadcast/CharitynWallet.s.sol/11155111/run-latest.json
+
+Sensitive values saved to: /mnt/c/Users/anton/Desktop/BlockChain-Projects/eattheblocks/week2HW/cache/CharitynWallet.s.sol/11155111/run-latest.json
+
+antony@DESKTOP-8R44L35:/mnt/c/Users/anton/Desktop/BlockChain-Projects/eattheblocks/week2HW$ 

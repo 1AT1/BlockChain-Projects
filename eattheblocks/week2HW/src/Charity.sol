@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-contract Charity {
+contract Charity{
     address public owner;
 
     event Donated(address indexed donator, uint256 amount);
