@@ -8,7 +8,7 @@ contract CounterTest is Test {
     DecentralizedCrowdfunding public DCf;
     event CampaignCreated(uint256 indexed campaignId, address owner, uint256 goal, uint256 deadline);
 
-
+     uint256 public numCampaigns = 0;
 
 
 
@@ -18,7 +18,6 @@ contract CounterTest is Test {
     }
 
     function test_createCampaign_invalidGoal() public{
-        uint256 numCampaigns = 0;
         vm.expectRevert(DecentralizedCrowdfunding.InvalidGoal.selector);
         DCf.createCampaign(0, 100 days);
     }

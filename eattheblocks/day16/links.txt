@@ -1,0 +1,11 @@
+https://www.cyfrin.io/blog/solidity-gas-optimization-tips
+https://github.com/harendra-shakya/solidity-gas-optimization
+https://github.com/cryptofinlabs/audit-checklist
+https://dashboard.alchemy.com/apps
+https://bridge.arbitrum.io/?destinationChain=arbitrum-one&sourceChain=ethereum
+https://bridge.arbitrum.io/?destinationChain=arbitrum-sepolia&sourceChain=sepolia
+https://sepolia.arbiscan.io/
+https://etherscan.io/
+https://arbiscan.io/
+https://chainlist.org/
+https://github.com/OpenZeppelin/openzeppelin-contracts/blob/793d92a3331538d126033cbacb1ee5b8a7d95adc/contracts/utils/Create2.sol

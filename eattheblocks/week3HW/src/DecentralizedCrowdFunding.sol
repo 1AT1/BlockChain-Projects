@@ -44,7 +44,8 @@ contract DecentralizedCrowdfunding {
         if (_goal == 0) revert InvalidGoal();
 
         uint256 deadline = block.timestamp + _duration;
-        Campaign storage newCampaign = campaigns[numCampaigns++];
+        numCampaigns++;
+        Campaign storage newCampaign = campaigns[numCampaigns];
         newCampaign.owner = payable(msg.sender);
         newCampaign.goal = _goal;
         newCampaign.deadline = deadline;
