@@ -1,2 +1,4 @@
 The project should do the following:
-    
+
+    A basic smart contract that allows users to store and retrieve a single number.
+    Functions: set(uint256 number), get() view returns (uint256).
